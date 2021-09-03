@@ -1,11 +1,11 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import React, { useEffect } from 'react'
-import { Button, Text, View } from 'react-native'
+import { ActivityIndicator, Button, Text, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 import { Character } from '../api/rickAndMorty/interface';
 import request, { TypeRequstRickAndMorty } from '../api/rickAndMorty/request';
 import { CharacterCard } from '../components/CharacterCard';
-import { getCharacter } from '../redux/rickAndMorty/actions';
+import { getData } from '../redux/rickAndMorty/actions';
 import { RootStackParams } from '../router/StackRouter';
 import { nameDetailsScreen } from './DetailsScreen';
 
@@ -18,36 +18,33 @@ export const HomeScreen = (props: Props) => {
 
     const dispatch = useDispatch()
 
-    const state = useSelector((state: Character[]) => state)
+    const globalState = useSelector((state: any) => state)
 
-    const getState = async () => {
-
-        const resp = await request({
-            typeOfRequest: TypeRequstRickAndMorty.GetAllCharacter
-        })
-
-        dispatch(getCharacter({
-            payload: resp
-        }))
-
-        // console.log(resp[0].name)
-
-
-    }
+    console.log(globalState)
 
     useEffect(() => {
-        getState()
+        dispatch(
+            getData()
+        )
     }, [])
 
-    if (state.length === 0) {
-        
+
+    if (globalState.character.state.length === 0) {
+
+        return (
+            <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <ActivityIndicator color='red' size={50} />
+            </View>
+        )
     }
 
     return (
         <View>
-            {/* <Text>{JSON.stringify(state)}</Text> */}
-            <CharacterCard character={state[0]} />
-
+            <CharacterCard character={globalState.character.state[0]} />
         </View>
     )
 }

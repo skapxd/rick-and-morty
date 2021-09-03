@@ -1,6 +1,14 @@
-import { createStore } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import { rootReducer } from "./rickAndMorty/reducer";
 
-export type RootState = ReturnType<typeof store.getState>
+const middleware = applyMiddleware(thunk)
 
-export const store = createStore(rootReducer)
+const reducers = combineReducers({
+    character: rootReducer,
+})
+
+export const store = createStore(
+    reducers,
+    middleware,
+)
