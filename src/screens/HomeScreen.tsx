@@ -1,12 +1,19 @@
+import { StackScreenProps } from '@react-navigation/stack'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Button, Text, View } from 'react-native'
+import { RootStackParams } from '../router/StackRouter';
+import { nameDetailsScreen } from './DetailsScreen';
+
+interface Props extends StackScreenProps<RootStackParams, 'nameHomeScreen'> { }
 
 export const nameHomeScreen = 'nameHomeScreen'
 
-export const HomeScreen = () => {
+export const HomeScreen = (props: Props) => {
     return (
         <View>
-            <Text>Hola</Text>
+            <Text>Home Screen</Text>
+
+            <Button title='go to Details page' onPress={() => props.navigation.navigate(nameDetailsScreen)} />
         </View>
     )
 }
