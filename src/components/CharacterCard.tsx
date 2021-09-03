@@ -6,7 +6,6 @@ import { Character } from '../api/rickAndMorty/interface';
 
 interface Props {
     character: Character
-    // navigate?: boolean
     onPress?: (character: Character) => void
 }
 

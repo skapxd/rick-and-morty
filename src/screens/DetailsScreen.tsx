@@ -1,8 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
-import { Character } from '../api/rickAndMorty/interface';
+import { ScrollView } from 'react-native-gesture-handler';
 import { CharacterCard } from '../components/CharacterCard';
 import { RootStackParams } from '../router/StackRouter';
 

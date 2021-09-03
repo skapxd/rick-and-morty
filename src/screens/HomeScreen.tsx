@@ -1,11 +1,9 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import React, { useEffect } from 'react'
-import { ActivityIndicator, Button, Dimensions, ScrollView, Text, View } from 'react-native'
+import { ActivityIndicator, Dimensions, ScrollView, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
 import { useDispatch, useSelector } from 'react-redux';
-import { Character } from '../api/rickAndMorty/interface';
-import request, { TypeRequstRickAndMorty } from '../api/rickAndMorty/request';
 import { CharacterCard } from '../components/CharacterCard';
 import { getData } from '../redux/rickAndMorty/actions';
 import { RootStackParams } from '../router/StackRouter';
