@@ -1,6 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import React, { useEffect } from 'react'
-import { ActivityIndicator, Dimensions, ScrollView, View } from 'react-native'
+import { ActivityIndicator, Dimensions, ScrollView, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,10 +17,6 @@ export const nameHomeScreen = 'nameHomeScreen'
 
 export const HomeScreen = (props: Props) => {
 
-    props.navigation.setOptions({
-        headerShown: true,
-        title: 'Home'
-    })
 
     const { top } = useSafeAreaInsets()
 
@@ -29,57 +25,57 @@ export const HomeScreen = (props: Props) => {
     const globalState = useSelector((state: any) => state)
 
     useEffect(() => {
+        props.navigation.setOptions({
+            headerShown: true,
+            title: 'Home'
+        })
         dispatch(
             getData()
         )
     }, [])
 
 
-    if (globalState.character.state.length === 0) {
+    const isCharacterCero = globalState?.character?.state?.length;
+
+    if (isCharacterCero === 0) {
 
         return (
             <View style={{
                 flex: 1,
+                alignItems: 'center',
                 justifyContent: 'center',
-                alignItems: 'center'
             }}>
                 <ActivityIndicator color='red' size={50} />
             </View>
         )
+    } else {
+
+        return (
+
+            <ScrollView>
+
+                <View style={{
+                    width,
+                    height: 470,
+                    marginTop: top + 20,
+                }}>
+                    <Carousel
+                        itemWidth={300}
+                        sliderWidth={width}
+                        data={globalState.character.state}
+                        renderItem={({ item }: any) => (
+                            <CharacterCard
+                                character={item}
+                                onPress={() => {
+                                    props.navigation.navigate(nameDetailsScreen, item)
+                                }}
+                            />
+                        )}
+
+                    />
+                </View>
+            </ScrollView>
+        )
+
     }
-
-    return (
-
-
-        <ScrollView>
-
-            <View style={{
-                marginTop: top + 20,
-                height: 470,
-                width,
-            }}>
-                <Carousel
-                    data={globalState.character.state}
-                    renderItem={({ item }: any) => (
-                        <CharacterCard
-                            onPress={() => {
-                                props.navigation.navigate(nameDetailsScreen, item)
-                            }}
-                            character={item}
-                        />
-                    )}
-
-                    sliderWidth={width}
-                    itemWidth={300}
-                />
-            </View>
-
-
-
-        </ScrollView>
-
-        // <View>
-        //     <CharacterCard character={globalState.character.state[0]} />
-        // </View>
-    )
 }

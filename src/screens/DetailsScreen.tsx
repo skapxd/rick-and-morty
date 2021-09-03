@@ -1,10 +1,9 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { CharacterCard } from '../components/CharacterCard';
 import { RootStackParams } from '../router/StackRouter';
-
 
 export const nameDetailsScreen = 'nameDetailsScreen'
 
@@ -12,10 +11,12 @@ interface Props extends StackScreenProps<RootStackParams, 'nameDetailsScreen'> {
 }
 export const DetailsScreen = ({ navigation, route }: Props) => {
 
-    navigation.setOptions({
-        headerShown: true,
-        title: 'Character'
-    })
+    useEffect(() => {
+        navigation.setOptions({
+            headerShown: true,
+            title: 'Character'
+        })
+    }, [])
 
     return (
 
@@ -39,7 +40,7 @@ export const DetailsScreen = ({ navigation, route }: Props) => {
 
                 <Text style={style.detailsCharacter} >Status: {route.params.status}</Text>
                 <Text style={style.detailsCharacter} >Species: {route.params.species}</Text>
-                <Text style={style.detailsCharacter} >participated episodes: {route.params.episode?.length}</Text>
+                <Text style={style.detailsCharacter} >Episodes: {route.params.episode?.length}</Text>
 
 
             </View>

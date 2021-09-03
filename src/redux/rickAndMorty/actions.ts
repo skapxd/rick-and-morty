@@ -6,12 +6,15 @@ import request, { TypeRequstRickAndMorty } from "../../api/rickAndMorty/request"
 export const getData = () => {
     return async (dispatch: any) => {
 
-        const resp = await request({
-            typeOfRequest: TypeRequstRickAndMorty.GetAllCharacter
-        })
-        dispatch(
-            getCharacter(resp)
-        )
+        setTimeout(async () => {
+
+            const resp = await request({
+                typeOfRequest: TypeRequstRickAndMorty.GetAllCharacter
+            })
+            dispatch(
+                getCharacter(resp)
+            )
+        }, 500);
     }
 }
 
