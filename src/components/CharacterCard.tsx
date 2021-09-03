@@ -1,9 +1,10 @@
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Character } from '../api/rickAndMorty/interface'
 
 
 interface Props {
-    character: any
+    character: Character
     navigate?: boolean
 }
 
