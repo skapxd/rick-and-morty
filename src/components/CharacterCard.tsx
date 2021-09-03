@@ -1,19 +1,23 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Character } from '../api/rickAndMorty/interface'
+import { Character } from '../api/rickAndMorty/interface';
 
 
 interface Props {
     character: Character
-    navigate?: boolean
+    // navigate?: boolean
+    onPress?: (character: Character) => void
 }
 
-export const CharacterCard = ({ character, navigate = true }: Props) => {
+export const CharacterCard = ({ character, onPress }: Props) => {
+
+    const nav = useNavigation<NavigationProp<any>>()
 
     const isNavigable = (
         <TouchableOpacity
             activeOpacity={0.7}
-            // onPress={() => { nav.navigate(nameDetailsScreen, character) }}
+            onPress={() => { onPress && onPress(character) }}
             style={style.container}>
 
             <Image
@@ -54,7 +58,7 @@ export const CharacterCard = ({ character, navigate = true }: Props) => {
 
     )
     return (
-        navigate ? isNavigable : isNotNavigable
+        onPress ? isNavigable : isNotNavigable
     )
 }
 
