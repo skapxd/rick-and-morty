@@ -1,10 +1,14 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { rootReducer } from "./rickAndMorty/reducer";
+import { rootReducer, State } from "./rickAndMorty/reducer";
+
+export interface RootReducers {
+    character: State
+}
 
 const middleware = applyMiddleware(thunk)
 
-const reducers = combineReducers({
+const reducers = combineReducers<RootReducers>({
     character: rootReducer,
 })
 

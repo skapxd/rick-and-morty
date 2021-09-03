@@ -6,6 +6,7 @@ import Carousel from 'react-native-snap-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { CharacterCard } from '../components/CharacterCard';
 import { getData } from '../redux/rickAndMorty/actions';
+import { RootReducers } from '../redux/store';
 import { RootStackParams } from '../router/StackRouter';
 import { nameDetailsScreen } from './DetailsScreen';
 
@@ -22,7 +23,7 @@ export const HomeScreen = (props: Props) => {
 
     const dispatch = useDispatch()
 
-    const globalState = useSelector((state: any) => state)
+    const globalState = useSelector((state: RootReducers) => state)
 
     useEffect(() => {
         props.navigation.setOptions({
@@ -35,7 +36,7 @@ export const HomeScreen = (props: Props) => {
     }, [])
 
 
-    const isCharacterCero = globalState?.character?.state?.length;
+    const isCharacterCero = globalState.character.state.length;
 
     if (isCharacterCero === 0) {
 
